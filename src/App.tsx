@@ -217,11 +217,11 @@ function ProjectCard({ p }: { p: Project }) {
             <span className="uppercase tracking-[0.3em] text-[11px] text-white/40">in the oven</span>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
         <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
           <div>
-            <div className="text-lg tracking-tight">{p.name}</div>
-            <div className="text-[11px] uppercase tracking-[0.18em] text-white/60">{p.tag}</div>
+            <div className="text-lg tracking-tight drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">{p.name}</div>
+            <div className="text-[11px] uppercase tracking-[0.18em] text-white/75 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">{p.tag}</div>
           </div>
           {p.status && (
             <span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-amber-200/90">{p.status}</span>
@@ -322,7 +322,7 @@ function Community() {
                   <span className="uppercase tracking-[0.3em] text-[11px] text-white/40">photo coming soon</span>
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/25" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/40" />
             </div>
             <div className="relative z-10 md:w-2/5 p-6 md:p-8 flex flex-col">
               <div className="text-[11px] uppercase tracking-[0.18em] text-white/60">{c.role}</div>
