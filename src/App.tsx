@@ -88,7 +88,7 @@ function Home({ go }: { go: (p: Page) => void }) {
     <main className="min-h-screen px-4 sm:px-6 md:px-10 lg:px-14 pt-24 pb-10 flex flex-col">
       <div className="max-w-3xl fade-up">
         <h1 className="text-[28px] sm:text-3xl md:text-4xl lg:text-[44px] leading-[1.15] font-normal tracking-tight">
-          Hi, I'm Kimi Yashar!
+          Hi, I'm Kimi!
         </h1>
         <p className="mt-3 text-sm md:text-[15px] leading-[1.6] text-white/60 max-w-3xl">
           A CMU student who builds things instead of waiting for someone else to. 3D room
