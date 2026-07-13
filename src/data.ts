@@ -47,15 +47,6 @@ export const PROJECTS: Project[] = [
     tint: '#324444',
   },
   {
-    name: 'Discovery Day',
-    tag: 'nonprofit website',
-    problem: 'School science budgets keep shrinking, so whole classrooms lose the labs that make kids love science.',
-    solution: 'Discovery Day brings free hands-on science workshops to Bay Area classrooms; this site is how schools find and book them.',
-    link: 'https://bay-area-discovery-day.vercel.app',
-    shot: '/shots/discovery-day.jpg',
-    tint: '#2e4436',
-  },
-  {
     name: 'Read to Me',
     tag: 'Safari extension',
     problem: 'Long articles pile up because reading them means sitting still and staring at a screen.',
@@ -66,7 +57,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Drude Model',
     tag: 'physics explainer',
-    problem: 'Why do copper interconnects give up at 100 GHz? The textbook answer is buried in a semester of solid-state physics.',
+    problem: 'Interactive demos of the key mishaps: how metal interconnects degrade, lose signal, and fail as frequencies push toward 100 GHz.',
     solution: 'A first-principles walkthrough from the Drude model of copper, silver, and gold to real transmission-line loss.',
     link: 'https://26kimiy.github.io/drudemodel/',
     linkLabel: 'View on GitHub Pages',
