@@ -360,9 +360,7 @@ function Resume() {
       <div className="flex items-end justify-between pb-4 fade-up">
         <div>
           <SectionLabel text="Resume" align="start" />
-          <h1 className="mt-3 text-[26px] sm:text-3xl md:text-4xl leading-[1.15] tracking-tight">
-            The formal version.
-          </h1>
+          <p className="mt-3 text-sm md:text-[15px] text-white/60">Last updated July 2026</p>
         </div>
         <div className="flex gap-2">
           <a
@@ -383,10 +381,15 @@ function Resume() {
         </div>
       </div>
       <div className="flex-1 overflow-y-auto fade-up fade-up-1">
-        <a href="/resume.pdf" target="_blank" rel="noreferrer" className="block max-w-3xl mx-auto">
+        <a href="/resume.pdf" target="_blank" rel="noreferrer" className="block max-w-3xl mx-auto space-y-5 pb-2">
           <img
-            src="/resume-preview.jpg"
+            src="/resume-p1.jpg"
             alt="Kimi Yashar resume, page 1. Click to open the full PDF."
+            className="w-full rounded-2xl shadow-2xl shadow-black/60 hover:opacity-95 transition-opacity"
+          />
+          <img
+            src="/resume-p2.jpg"
+            alt="Kimi Yashar resume, page 2. Click to open the full PDF."
             className="w-full rounded-2xl shadow-2xl shadow-black/60 hover:opacity-95 transition-opacity"
           />
         </a>

@@ -107,10 +107,12 @@ export const COMMUNITY: CommunityItem[] = [
   },
   {
     name: 'Community Tables',
-    role: 'Volunteer',
+    role: 'Founder',
     blurb:
-      'Helping host community meals that bring neighbors together around one table.',
-    tint: '#324444',
+      'Monthly hands-on cooking classes at Sunday Friends, a food distribution and family services center in East San Jose serving 1,000+ members. 300+ families taught so far, in both Spanish and English.',
+    link: 'https://kimiyashar.wixsite.com/impact/communitytables',
+    shot: '/shots/community-tables.jpg',
+    tint: '#443a2e',
   },
 ]
 
