@@ -301,7 +301,7 @@ function Community() {
       <div className="px-4 sm:px-6 md:px-10 lg:px-14 pb-4 fade-up">
         <SectionLabel text="Community" align="start" />
         <h1 className="mt-3 text-[26px] sm:text-3xl md:text-4xl leading-[1.15] tracking-tight">
-          Work that isn't about me.
+          Off-line projects.
         </h1>
         <p className="mt-2 text-sm md:text-[15px] leading-[1.6] text-white/60 flex items-center gap-2">
           Scroll down through the causes <ChevronDown className="h-4 w-4 text-white/40" strokeWidth={1.5} />
