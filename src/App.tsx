@@ -75,7 +75,7 @@ function Nav({ page, go }: { page: Page; go: (p: Page) => void }) {
         href={`mailto:${CONTACT.email}`}
         className="liquid-glass hidden sm:flex rounded-full px-5 py-2.5 text-[13px] text-white/90 hover:text-white transition-colors items-center gap-1.5"
       >
-        Say hi <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+        Say Hello <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.5} />
       </a>
     </nav>
   )
