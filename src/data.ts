@@ -43,8 +43,7 @@ export const PROJECTS: Project[] = [
     tag: '3D fountain builder',
     problem: 'Sketching a fountain on paper tells you nothing about how the water will actually move and look.',
     solution: 'FountainCraft is a drag-and-drop 3D builder with jets, lights, and realistic water physics, all in the browser.',
-    link: 'https://fountain-engineering.vercel.app',
-    shot: '/shots/fountain.jpg',
+    status: 'still tweaking',
     tint: '#324444',
   },
   {
