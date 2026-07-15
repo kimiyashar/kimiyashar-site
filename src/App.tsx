@@ -147,9 +147,9 @@ function Home({ go }: { go: (p: Page) => void }) {
           className="fade-up fade-up-3 group rounded-2xl bg-black relative overflow-hidden text-left min-h-[260px]"
         >
           <img
-            src="/shots/discovery-day.jpg"
-            alt="Discovery Day"
-            className="absolute inset-0 h-full w-full object-cover opacity-50 group-hover:opacity-65 group-hover:scale-[1.02] transition-all duration-500"
+            src="/shots/offline.jpg"
+            alt="Kimi teaching a Discovery Day science lesson"
+            className="absolute inset-0 h-full w-full object-cover object-top opacity-50 group-hover:opacity-65 group-hover:scale-[1.02] transition-all duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/40" />
           <div className="relative z-10 h-full flex flex-col p-5 md:p-6">
