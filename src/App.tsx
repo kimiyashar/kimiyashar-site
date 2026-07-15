@@ -87,7 +87,12 @@ function Nav({ page, go }: { page: Page; go: (p: Page) => void }) {
 function Home({ go }: { go: (p: Page) => void }) {
   return (
     <main className="min-h-screen px-4 sm:px-6 md:px-10 lg:px-14 pt-24 pb-10 flex flex-col">
-      <div className="max-w-3xl fade-up">
+      <div className="max-w-3xl fade-up flex items-center gap-4 sm:gap-5">
+        <img
+          src="/kimi.jpg"
+          alt="Kimi Yashar"
+          className="h-16 w-16 sm:h-20 sm:w-20 rounded-full object-cover ring-1 ring-white/15 shadow-lg shadow-black/40 shrink-0"
+        />
         <h1 className="text-[28px] sm:text-3xl md:text-4xl lg:text-[44px] leading-[1.15] font-normal tracking-tight">
           Hi, I'm Kimi!
         </h1>
@@ -405,7 +410,7 @@ export default function App() {
     window.scrollTo(0, 0)
   }, [page])
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen text-white">
       <Nav page={page} go={go} />
       {page === 'home' && <Home go={go} />}
       {page === 'projects' && <Projects />}
