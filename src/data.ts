@@ -116,4 +116,5 @@ export const CONTACT = {
   email: 'kimi@yasharfamily.com',
   github: 'https://github.com/26kimiy',
   githubHandle: '26kimiy',
+  linkedin: 'https://www.linkedin.com/in/kimiyashar/',
 }

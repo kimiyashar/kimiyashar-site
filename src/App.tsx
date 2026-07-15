@@ -5,6 +5,7 @@ import {
   ArrowRight,
   Sparkle,
   Code2,
+  Briefcase,
   Mail,
   Download,
   ChevronDown,
@@ -90,11 +91,6 @@ function Home({ go }: { go: (p: Page) => void }) {
         <h1 className="text-[28px] sm:text-3xl md:text-4xl lg:text-[44px] leading-[1.15] font-normal tracking-tight">
           Hi, I'm Kimi!
         </h1>
-        <p className="mt-3 text-sm md:text-[15px] leading-[1.6] text-white/60 max-w-3xl">
-          A CMU student who builds things instead of waiting for someone else to. 3D room
-          planners, satellite maps, physics explainers, and free science labs for kids, all
-          shipped, most of them live, a couple still in the oven.
-        </p>
       </div>
 
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 flex-1">
@@ -178,6 +174,9 @@ function Home({ go }: { go: (p: Page) => void }) {
             </a>
             <a href={CONTACT.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-[13.5px] text-white/85 hover:text-white transition-colors">
               <Code2 className="h-4 w-4" strokeWidth={1.5} /> github.com/{CONTACT.githubHandle}
+            </a>
+            <a href={CONTACT.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-[13.5px] text-white/85 hover:text-white transition-colors">
+              <Briefcase className="h-4 w-4" strokeWidth={1.5} /> LinkedIn
             </a>
           </div>
           <a
