@@ -131,9 +131,11 @@ function Home({ go }: { go: (p: Page) => void }) {
           <div className="relative z-10 h-full flex flex-col p-5 md:p-6">
             <SectionLabel text="AI Projects" align="start" />
             <div className="mt-auto">
-              <div className="text-3xl md:text-4xl font-light tracking-tight">{PROJECTS.length}</div>
+              <div className="text-xl md:text-2xl font-light tracking-tight leading-snug">
+                Tools I made and use every day
+              </div>
               <div className="text-white/70 text-[13px] mt-1">
-                things I've built, from dorm rooms to orbit
+                from dorm rooms to orbit
               </div>
             </div>
           </div>
@@ -154,10 +156,7 @@ function Home({ go }: { go: (p: Page) => void }) {
             <SectionLabel text="Community" align="start" />
             <div className="mt-auto">
               <div className="text-xl md:text-2xl font-light tracking-tight leading-snug">
-                Free science labs for kids
-              </div>
-              <div className="text-white/70 text-[13px] mt-1">
-                Discovery Day, Community Tables, and more
+                Off-line projects
               </div>
             </div>
           </div>
