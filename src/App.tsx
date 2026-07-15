@@ -158,6 +158,9 @@ function Home({ go }: { go: (p: Page) => void }) {
               <div className="text-xl md:text-2xl font-light tracking-tight leading-snug">
                 Off-line projects
               </div>
+              <div className="text-white/70 text-[13px] mt-1">
+                volunteering and teaching
+              </div>
             </div>
           </div>
         </button>
@@ -302,7 +305,7 @@ function Community() {
           Off-line projects.
         </h1>
         <p className="mt-2 text-sm md:text-[15px] leading-[1.6] text-white/60 flex items-center gap-2">
-          Scroll down through the causes <ChevronDown className="h-4 w-4 text-white/40" strokeWidth={1.5} />
+          volunteering and teaching <ChevronDown className="h-4 w-4 text-white/40" strokeWidth={1.5} />
         </p>
       </div>
       <div className="carousel-y flex-1 overflow-y-auto px-4 sm:px-6 md:px-10 lg:px-14 pb-6 space-y-5">
