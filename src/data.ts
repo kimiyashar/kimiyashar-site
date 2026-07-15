@@ -59,7 +59,7 @@ export const PROJECTS: Project[] = [
     tag: 'physics explainer',
     problem: 'Interactive demos of the key mishaps: how metal interconnects degrade, lose signal, and fail as frequencies push toward 100 GHz.',
     solution: 'A first-principles walkthrough from the Drude model of copper, silver, and gold to real transmission-line loss.',
-    link: 'https://26kimiy.github.io/drudemodel/',
+    link: 'https://kimiyashar.github.io/drudemodel/',
     linkLabel: 'View on GitHub Pages',
     shot: '/shots/drude.jpg',
     tint: '#3d3030',
@@ -69,7 +69,7 @@ export const PROJECTS: Project[] = [
     tag: 'interactive report',
     problem: 'Moving a 100 GHz signal across a chip is even harder than generating it, and few explanations say why.',
     solution: 'An interactive single-page explainer with live math, charts, and simulations, and how optical interconnects change the game.',
-    link: 'https://26kimiy.github.io/restraints-of-100ghz/',
+    link: 'https://kimiyashar.github.io/restraints-of-100ghz/',
     linkLabel: 'View on GitHub Pages',
     shot: '/shots/ghz100.jpg',
     tint: '#31404a',
@@ -114,7 +114,7 @@ export const NOW = [
 
 export const CONTACT = {
   email: 'kimi@yasharfamily.com',
-  github: 'https://github.com/26kimiy',
-  githubHandle: '26kimiy',
+  github: 'https://github.com/kimiyashar',
+  githubHandle: 'kimiyashar',
   linkedin: 'https://www.linkedin.com/in/kimiyashar/',
 }
