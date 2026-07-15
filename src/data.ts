@@ -107,9 +107,9 @@ export const COMMUNITY: CommunityItem[] = [
 ]
 
 export const NOW = [
-  { label: 'Read to Me', detail: 'Safari extension in final tweaks, heading to the App Store' },
-  { label: 'DormView', detail: 'expanding from E-Tower to every dorm at CMU' },
-  { label: 'This site', detail: 'you are looking at the work in progress' },
+  { label: 'Read to Me', detail: 'final tweaks before the App Store' },
+  { label: 'DormView', detail: 'expanding to every CMU dorm' },
+  { label: 'This site', detail: "you're looking at it right now" },
 ]
 
 export const CONTACT = {

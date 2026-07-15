@@ -132,10 +132,10 @@ function Home({ go }: { go: (p: Page) => void }) {
             <SectionLabel text="AI Projects" align="start" />
             <div className="mt-auto">
               <div className="text-xl md:text-2xl font-light tracking-tight leading-snug">
-                Tools I made and use every day
+                AI Projects
               </div>
               <div className="text-white/70 text-[13px] mt-1">
-                from dorm rooms to orbit
+                That I use everyday
               </div>
             </div>
           </div>
