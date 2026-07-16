@@ -72,12 +72,18 @@ function Nav({ page, go }: { page: Page; go: (p: Page) => void }) {
           </button>
         ))}
       </div>
-      <a
-        href={`mailto:${CONTACT.email}`}
+      <button
+        onClick={() => {
+          if (page !== 'home') go('home')
+          window.setTimeout(
+            () => document.getElementById('reach-me')?.scrollIntoView({ behavior: 'smooth', block: 'center' }),
+            page !== 'home' ? 130 : 0,
+          )
+        }}
         className="liquid-glass hidden sm:flex rounded-full px-5 py-2.5 text-[13px] text-white/90 hover:text-white transition-colors items-center gap-1.5"
       >
         Say Hello <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-      </a>
+      </button>
     </nav>
   )
 }
@@ -168,7 +174,7 @@ function Home({ go }: { go: (p: Page) => void }) {
 
       {/* Reach me row */}
       <div className="mt-4 md:mt-5 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-        <div className="rounded-2xl noise-overlay p-5 md:p-6 md:col-span-2 relative" style={{ background: '#324444' }}>
+        <div id="reach-me" className="scroll-mt-24 rounded-2xl noise-overlay p-5 md:p-6 md:col-span-2 relative" style={{ background: '#324444' }}>
           <SectionLabel text="Reach me" align="start" />
           <div className="mt-4 flex flex-col sm:flex-row gap-3 sm:gap-8 relative z-10">
             <a href={`mailto:${CONTACT.email}`} className="flex items-center gap-2 text-[13.5px] text-white/85 hover:text-white transition-colors">
