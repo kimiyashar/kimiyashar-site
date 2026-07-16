@@ -72,18 +72,14 @@ function Nav({ page, go }: { page: Page; go: (p: Page) => void }) {
           </button>
         ))}
       </div>
-      <button
-        onClick={() => {
-          if (page !== 'home') go('home')
-          window.setTimeout(
-            () => document.getElementById('reach-me')?.scrollIntoView({ behavior: 'smooth', block: 'center' }),
-            page !== 'home' ? 130 : 0,
-          )
-        }}
+      <a
+        href={`https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT.email}&su=${encodeURIComponent('Hi Kimi!')}`}
+        target="_blank"
+        rel="noreferrer"
         className="liquid-glass hidden sm:flex rounded-full px-5 py-2.5 text-[13px] text-white/90 hover:text-white transition-colors items-center gap-1.5"
       >
         Say Hello <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-      </button>
+      </a>
     </nav>
   )
 }
