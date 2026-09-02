@@ -108,16 +108,29 @@ function Nav({ page, go }: { page: Page; go: (p: Page) => void }) {
 
 /* ---------------- HOME ---------------- */
 
-// DRAFT — Kimi to replace. This is my placeholder wording, not hers.
-const SEM_CAPTION =
-  'A silicon wafer I put under the SEM after cycling. At 990× the edge stops ' +
-  'being a line and turns into a coastline.'
+/* Both numbers below are read off each frame's own instrument data bar.
+   Wide field: aftercycling9.tiff, 990x, FW 525 um, BSD 15 kV, 2026-07-29.
+   Detail:     aftercycling5.tiff, 7300x, FW 70.9 um, BSD 15 kV, 2026-07-29.
+   The marker box is sized from those two field widths, so it covers the true
+   fraction of the wide field that the detail actually represents: 13.5%. */
+const SEM_PLATE_W = 2200
+const SEM_PLATE_H = 1277
+const SEM_PLATE_FW = 525      // um across the wide field
+const SEM_DETAIL_FW = 70.9    // um across the detail frame
+const SEM_DETAIL_ASPECT = 1600 / 1000
+
+// where on the wide plate the detail is called out from, as a fraction of the image
+const SEM_ANCHOR_U = 0.44
+const SEM_ANCHOR_V = 0.52
 
 function useSemScroll() {
   useEffect(() => {
     const root = document.documentElement
+    root.dataset.sem = 'on'
     let raf = 0
     const clamp01 = (n: number) => Math.min(1, Math.max(0, n))
+
+    const svg = () => document.querySelector<SVGSVGElement>('.sem-leader')
     const update = () => {
       raf = 0
       const max = root.scrollHeight - window.innerHeight
@@ -127,9 +140,86 @@ function useSemScroll() {
       // caption reveals off the stage's own entry, not page scroll, so the fade
       // lands on screen instead of below the fold — full at the moment it pins
       const stage = document.querySelector('.sem-stage')
-      const h = window.innerHeight
-      const entry = stage ? (h - stage.getBoundingClientRect().top) / h : 0
-      root.style.setProperty('--sem-c', clamp01((entry - 0.72) / 0.34).toFixed(4))
+      const vw = window.innerWidth
+      const vh = window.innerHeight
+      const entry = stage ? (vh - stage.getBoundingClientRect().top) / vh : 0
+      const c = clamp01((entry - 0.72) / 0.34)
+      // the callout leads the caption so the box lands, the arrow draws, then the words
+      const r = clamp01((entry - 0.50) / 0.34)
+      root.style.setProperty('--sem-c', c.toFixed(4))
+      root.style.setProperty('--sem-r', r.toFixed(4))
+
+      // --- track the called-out region through the zoom -------------------
+      // 1. replicate `background-size: cover; background-position: left bottom`
+      const cover = Math.max(vw / SEM_PLATE_W, vh / SEM_PLATE_H)
+      const rw = SEM_PLATE_W * cover
+      const rh = SEM_PLATE_H * cover
+      // narrow desktops leave less room between the marker and the plate, so the
+      // callout walks left as the viewport tightens instead of crowding the box
+      const slack = clamp01((vw - 1000) / 400)
+      const anchorU = 0.34 + (SEM_ANCHOR_U - 0.34) * slack
+      const bx = anchorU * rw                 // left-anchored
+      const by = vh - rh + SEM_ANCHOR_V * rh  // bottom-anchored
+      // 2. replicate `transform: scale(s)` about `transform-origin: 30% 66%`
+      const s = 1 + 0.48 * p
+      const ox = 0.30 * vw
+      const oy = 0.66 * vh
+      const mx = ox + (bx - ox) * s
+      const my = oy + (by - oy) * s
+      // 3. marker covers the true field fraction, and zooms with the specimen
+      const mw = (SEM_DETAIL_FW / SEM_PLATE_FW) * rw * s
+      const mh = (mw / SEM_DETAIL_ASPECT)
+
+      const el = svg()
+      const box = document.querySelector<HTMLElement>('.sem-inset')
+      if (!el || !box) return
+      el.setAttribute('viewBox', `0 0 ${vw} ${vh}`)
+      const rect = el.querySelector('.sem-marker') as SVGRectElement | null
+      if (rect) {
+        rect.setAttribute('x', String(mx - mw / 2))
+        rect.setAttribute('y', String(my - mh / 2))
+        rect.setAttribute('width', String(mw))
+        rect.setAttribute('height', String(mh))
+      }
+
+      // leader runs from the inset box's nearest edge to the marker
+      const b = box.getBoundingClientRect()
+      const cxb = b.left + b.width / 2
+      const cyb = b.top + b.height / 2
+      let dx = mx - cxb
+      let dy = my - cyb
+      const len = Math.hypot(dx, dy) || 1
+      dx /= len; dy /= len
+      // exit point on the box perimeter, then stop short of the marker edge
+      const tx = Math.abs(dx) > 1e-6 ? (b.width / 2 + 8) / Math.abs(dx) : Infinity
+      const ty = Math.abs(dy) > 1e-6 ? (b.height / 2 + 8) / Math.abs(dy) : Infinity
+      const t = Math.min(tx, ty)
+      const x1 = cxb + dx * t
+      const y1 = cyb + dy * t
+      const stop = Math.max(mw, mh) / 2 + 7
+      const x2 = mx - dx * stop
+      const y2 = my - dy * stop
+
+      const line = el.querySelector('.sem-leader-line') as SVGLineElement | null
+      if (line) {
+        line.setAttribute('x1', String(x1)); line.setAttribute('y1', String(y1))
+        line.setAttribute('x2', String(x2)); line.setAttribute('y2', String(y2))
+        const L = Math.hypot(x2 - x1, y2 - y1)
+        const draw = clamp01((r - 0.30) / 0.45)
+        line.style.strokeDasharray = String(L)
+        line.style.strokeDashoffset = String(L * (1 - draw))
+      }
+      const head = el.querySelector('.sem-leader-head') as SVGPolygonElement | null
+      if (head) {
+        const a = 9, wdt = 5
+        const px = -dy, py = dx  // perpendicular
+        head.setAttribute('points', [
+          `${x2 + dx * a},${y2 + dy * a}`,
+          `${x2 + px * wdt},${y2 + py * wdt}`,
+          `${x2 - px * wdt},${y2 - py * wdt}`,
+        ].join(' '))
+        head.style.opacity = String(clamp01((r - 0.68) / 0.18))
+      }
     }
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update) }
     update()
@@ -139,9 +229,9 @@ function useSemScroll() {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
       cancelAnimationFrame(raf)
-      // leaving Home resets the background to its static frame
       root.style.removeProperty('--sem-p')
-      root.style.removeProperty('--sem-c')
+      root.style.removeProperty('--sem-r')
+      delete root.dataset.sem
     }
   }, [])
 }
@@ -267,15 +357,48 @@ function Home({ go }: { go: (p: Page) => void }) {
     {/* SEM specimen reveal — scroll room that the background zooms into */}
     <section className="sem-stage relative h-[140vh]">
       {/* sticky so the caption holds on screen while the zoom finishes behind it */}
-      <div className="sticky top-0 h-screen flex items-end px-4 sm:px-6 md:px-10 lg:px-14 pb-[12vh]">
-        <figure className="sem-caption max-w-lg m-0 rounded-2xl bg-black/45 backdrop-blur-[2px] p-5 md:p-6">
-          <figcaption className="text-white/55 text-[13.5px] leading-[1.65] font-light">
-            {SEM_CAPTION}
-          </figcaption>
-          <div className="mt-3 pl-3 border-l border-white/20 font-mono uppercase text-[10.5px] tracking-[0.14em] text-white/40">
-            Si wafer edge / after cycling / 990&times; / BSD 15&nbsp;kV
+      <div className="sticky top-0 h-screen px-4 sm:px-6 md:px-10 lg:px-14">
+
+        {/* leader: marks the called-out region on the wide field, points to the detail */}
+        <svg className="sem-leader" preserveAspectRatio="none" aria-hidden="true">
+          <rect className="sem-marker" x="0" y="0" width="0" height="0" rx="2" />
+          <line className="sem-leader-line" x1="0" y1="0" x2="0" y2="0" />
+          <polygon className="sem-leader-head" points="0,0 0,0 0,0" />
+        </svg>
+
+        {/* detail plate — full quality, unfaded, deliberately sharper than the field */}
+        <figure className="sem-inset m-0">
+          <div className="sem-inset-frame">
+            <img
+              src="/sem/pyramid-texture-7300x.jpg"
+              alt="Anti-reflective pyramid surface texture etched into the silicon wafer, at 7,300x magnification"
+            />
+            <span className="sem-scalebar"><i /><em>20&nbsp;&micro;m</em></span>
+          </div>
+          <div className="sem-inset-text">
+            <figcaption className="sem-inset-cap">
+              Anti-reflective pyramid surface texture etched into the silicon wafer,
+              shown at <span className="whitespace-nowrap">7,300&times;</span> magnification
+              and imaged via SEM at SLAC National Accelerator Laboratory.
+            </figcaption>
+            <div className="sem-inset-meta">
+              70.9&nbsp;<i className="sem-unit">&micro;m</i> field <span>&middot;</span> BSD 15&nbsp;kV
+            </div>
           </div>
         </figure>
+
+        <div className="absolute inset-x-0 bottom-0 flex items-end px-4 sm:px-6 md:px-10 lg:px-14 pb-[12vh]">
+          <figure className="sem-caption max-w-lg m-0 rounded-2xl bg-black/45 backdrop-blur-[2px] p-5 md:p-6">
+            <figcaption className="text-white/60 text-[13.5px] leading-[1.65] font-light">
+              Single-crystal silicon wafer at 990&times; magnification, etched
+              overnight in 2&nbsp;M KOH and imaged via SEM at SLAC National
+              Accelerator Laboratory.
+            </figcaption>
+            <div className="sem-meta mt-3 pl-3 border-l border-white/20 font-mono uppercase text-[10.5px] tracking-[0.14em] text-white/40">
+              Si wafer edge / 525&nbsp;<span className="normal-case">&micro;m</span> field / BSD 15&nbsp;kV
+            </div>
+          </figure>
+        </div>
       </div>
     </section>
     </>
