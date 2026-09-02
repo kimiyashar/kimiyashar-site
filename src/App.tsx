@@ -177,11 +177,14 @@ function useSemScroll() {
       // max-width — a bar that reads 50 um while being drawn short is a lie — so
       // step down a ladder to the longest round value that still fits.
       const pxPerUm = (rw * s) / SEM_PLATE_FW
-      const um = SEM_BAR_LADDER.find((u) => u * pxPerUm <= 240) ?? SEM_BAR_LADDER[SEM_BAR_LADDER.length - 1]
+      const um = SEM_BAR_LADDER.find((u) => u * pxPerUm <= 170) ?? SEM_BAR_LADDER[SEM_BAR_LADDER.length - 1]
       root.style.setProperty('--sem-bar', `${(um * pxPerUm).toFixed(1)}px`)
-      const barLabel = document.querySelector('.sem-fieldbar em')
+      // two bars can be mounted (card + specimen); the variant switch decides
+      // which is visible, so label both rather than only the first match
       const barText = `${um} µm`
-      if (barLabel && barLabel.textContent !== barText) barLabel.textContent = barText
+      document.querySelectorAll('.sem-fieldbar em').forEach((el) => {
+        if (el.textContent !== barText) el.textContent = barText
+      })
 
       const el = svg()
       const box = document.querySelector<HTMLElement>('.sem-inset')
@@ -383,7 +386,7 @@ function Home({ go }: { go: (p: Page) => void }) {
         <figure className="sem-inset m-0">
           <div className="sem-inset-frame">
             <img
-              src="/sem/pyramid-texture-7300x.jpg"
+              src="/sem/inset-7300x.jpg"
               alt="Anti-reflective pyramid surface texture etched into the silicon wafer, at 7,300x magnification"
             />
             <span className="sem-scalebar"><i /><em>20&nbsp;&micro;m</em></span>
@@ -397,11 +400,13 @@ function Home({ go }: { go: (p: Page) => void }) {
           </div>
         </figure>
 
+        {/* the scale bar rides on the micrograph itself, the way the
+            detail plate does — a bar inside a floating card appears to measure
+            the card, not the specimen behind it */}
+        <span className="sem-fieldbar sem-fieldbar--stage"><i /><em>50&nbsp;&micro;m</em></span>
+
         <div className="absolute inset-x-0 bottom-0 flex items-end px-4 sm:px-6 md:px-10 lg:px-14 pb-[12vh]">
           <figure className="sem-caption max-w-lg m-0 p-5 md:p-6">
-            {/* sentence leads; the two metadata items cluster under it, so the
-                panel reads caption-then-credentials instead of opening on a
-                stray rule */}
             <figcaption className="text-white/[0.78] text-[13.5px] leading-[1.65] font-light">
               Single-crystal silicon wafer at 990&times; magnification, etched
               overnight in 2&nbsp;M KOH and imaged via SEM at SLAC National
@@ -411,9 +416,13 @@ function Home({ go }: { go: (p: Page) => void }) {
               {/* the wide field has no burnt-in bar left after cropping, and it
                   zooms, so its scale bar is measured each frame from the plate
                   geometry — JS writes --sem-bar and this em's label */}
-              <span className="sem-fieldbar"><i /><em>50&nbsp;&micro;m</em></span>
+              <span className="sem-fieldbar sem-fieldbar--card"><i /><em>50&nbsp;&micro;m</em></span>
+              {/* split so a narrow panel breaks between name and institution
+                  instead of mid-way through "SLAC National Accelerator Laboratory" */}
               <span className="sem-credit">
-                Kimi Yashar / SLAC National Accelerator Laboratory
+                <b>Kimi Yashar</b>
+                <s>/</s>
+                <b>SLAC National Accelerator Laboratory</b>
               </span>
             </div>
           </figure>
