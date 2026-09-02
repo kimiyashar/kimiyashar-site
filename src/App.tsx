@@ -398,17 +398,23 @@ function Home({ go }: { go: (p: Page) => void }) {
         </figure>
 
         <div className="absolute inset-x-0 bottom-0 flex items-end px-4 sm:px-6 md:px-10 lg:px-14 pb-[12vh]">
-          <figure className="sem-caption max-w-lg m-0 rounded-2xl bg-black/45 backdrop-blur-[2px] p-5 md:p-6">
-            {/* the wide field has no burnt-in bar left after cropping, and it zooms,
-                so its scale bar is measured each frame from the plate geometry */}
-            <span className="sem-fieldbar"><i /><em>50&nbsp;&micro;m</em></span>
-            <figcaption className="text-white/60 text-[13.5px] leading-[1.65] font-light">
+          <figure className="sem-caption max-w-lg m-0 p-5 md:p-6">
+            {/* sentence leads; the two metadata items cluster under it, so the
+                panel reads caption-then-credentials instead of opening on a
+                stray rule */}
+            <figcaption className="text-white/[0.78] text-[13.5px] leading-[1.65] font-light">
               Single-crystal silicon wafer at 990&times; magnification, etched
               overnight in 2&nbsp;M KOH and imaged via SEM at SLAC National
               Accelerator Laboratory.
             </figcaption>
-            <div className="sem-meta mt-3 pl-3 border-l border-white/20 font-mono uppercase text-[10.5px] tracking-[0.14em] text-white/40">
-              Kimi Yashar / SLAC National Accelerator Laboratory
+            <div className="sem-meta">
+              {/* the wide field has no burnt-in bar left after cropping, and it
+                  zooms, so its scale bar is measured each frame from the plate
+                  geometry — JS writes --sem-bar and this em's label */}
+              <span className="sem-fieldbar"><i /><em>50&nbsp;&micro;m</em></span>
+              <span className="sem-credit">
+                Kimi Yashar / SLAC National Accelerator Laboratory
+              </span>
             </div>
           </figure>
         </div>
