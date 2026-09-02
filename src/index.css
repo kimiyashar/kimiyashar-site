@@ -141,17 +141,31 @@ body::before {
   font-weight: 300;
   color: rgba(255, 255, 255, 0.55);
 }
-.sem-inset-meta {
-  margin-top: 7px;
+/* wide-field scale bar. --sem-bar is written by useSemScroll from the same
+   rendered-plate geometry the marker uses, so 50 um stays 50 um through the zoom.
+   Not uppercased: uppercase maps U+00B5 onto Greek capital Mu and reads as "MM". */
+.sem-fieldbar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  margin-bottom: 14px;
+}
+.sem-fieldbar i {
+  display: block;
+  width: var(--sem-bar, 150px);
+  max-width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+}
+.sem-fieldbar em {
+  font-style: normal;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 10px;
   letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.55);
 }
-.sem-inset-meta span { color: rgba(255, 255, 255, 0.25); }
-/* uppercase maps U+00B5 onto Greek capital Mu, which reads as "MM" — exempt the unit */
-.sem-inset-meta .sem-unit { font-style: normal; text-transform: none; }
 
 /* on narrow screens the leader has nowhere to run — drop it, keep the plate */
 @media (max-width: 780px) {

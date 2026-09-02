@@ -118,6 +118,8 @@ const SEM_PLATE_H = 1277
 const SEM_PLATE_FW = 525      // um across the wide field
 const SEM_DETAIL_FW = 70.9    // um across the detail frame
 const SEM_DETAIL_ASPECT = 1600 / 1000
+// candidate wide-field bar lengths, longest first — the first one that fits wins
+const SEM_BAR_LADDER = [200, 100, 50, 20, 10]
 
 // where on the wide plate the detail is called out from, as a fraction of the image
 const SEM_ANCHOR_U = 0.44
@@ -169,6 +171,17 @@ function useSemScroll() {
       // 3. marker covers the true field fraction, and zooms with the specimen
       const mw = (SEM_DETAIL_FW / SEM_PLATE_FW) * rw * s
       const mh = (mw / SEM_DETAIL_ASPECT)
+
+      // wide-field scale bar: same rendered-plate basis as the marker. A fixed
+      // length would overflow its panel on very large displays and get clamped by
+      // max-width — a bar that reads 50 um while being drawn short is a lie — so
+      // step down a ladder to the longest round value that still fits.
+      const pxPerUm = (rw * s) / SEM_PLATE_FW
+      const um = SEM_BAR_LADDER.find((u) => u * pxPerUm <= 240) ?? SEM_BAR_LADDER[SEM_BAR_LADDER.length - 1]
+      root.style.setProperty('--sem-bar', `${(um * pxPerUm).toFixed(1)}px`)
+      const barLabel = document.querySelector('.sem-fieldbar em')
+      const barText = `${um} µm`
+      if (barLabel && barLabel.textContent !== barText) barLabel.textContent = barText
 
       const el = svg()
       const box = document.querySelector<HTMLElement>('.sem-inset')
@@ -381,21 +394,21 @@ function Home({ go }: { go: (p: Page) => void }) {
               shown at <span className="whitespace-nowrap">7,300&times;</span> magnification
               and imaged via SEM at SLAC National Accelerator Laboratory.
             </figcaption>
-            <div className="sem-inset-meta">
-              70.9&nbsp;<i className="sem-unit">&micro;m</i> field <span>&middot;</span> BSD 15&nbsp;kV
-            </div>
           </div>
         </figure>
 
         <div className="absolute inset-x-0 bottom-0 flex items-end px-4 sm:px-6 md:px-10 lg:px-14 pb-[12vh]">
           <figure className="sem-caption max-w-lg m-0 rounded-2xl bg-black/45 backdrop-blur-[2px] p-5 md:p-6">
+            {/* the wide field has no burnt-in bar left after cropping, and it zooms,
+                so its scale bar is measured each frame from the plate geometry */}
+            <span className="sem-fieldbar"><i /><em>50&nbsp;&micro;m</em></span>
             <figcaption className="text-white/60 text-[13.5px] leading-[1.65] font-light">
               Single-crystal silicon wafer at 990&times; magnification, etched
               overnight in 2&nbsp;M KOH and imaged via SEM at SLAC National
               Accelerator Laboratory.
             </figcaption>
             <div className="sem-meta mt-3 pl-3 border-l border-white/20 font-mono uppercase text-[10.5px] tracking-[0.14em] text-white/40">
-              Si wafer edge / 525&nbsp;<span className="normal-case">&micro;m</span> field / BSD 15&nbsp;kV
+              Kimi Yashar / SLAC National Accelerator Laboratory
             </div>
           </figure>
         </div>
