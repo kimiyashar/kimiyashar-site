@@ -221,6 +221,12 @@ function ProjectCard({ p }: { p: Project }) {
           </div>
         )}
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+        {p.detailShot && (
+          <div className="absolute top-3 right-3 flex items-center gap-1.5 rounded-full bg-white/90 p-1 text-black shadow-lg shadow-black/15 backdrop-blur-sm sm:py-1 sm:pl-1 sm:pr-2.5">
+            <img src={p.detailShot} alt="" className="h-8 w-8 rounded-full object-cover" />
+            <span className="hidden text-[9px] font-medium uppercase tracking-[0.14em] sm:inline">{p.detailLabel}</span>
+          </div>
+        )}
         <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
           <div>
             <div className="text-lg tracking-tight drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">{p.name}</div>
@@ -234,16 +240,28 @@ function ProjectCard({ p }: { p: Project }) {
       <div className="p-5 flex flex-col gap-2 flex-1 relative z-10">
         <p className="text-[13.5px] leading-[1.6] text-white/60">{p.problem}</p>
         <p className="text-[13.5px] leading-[1.6] text-white/90">{p.solution}</p>
-        <div className="mt-auto pt-3">
+        <div className="mt-auto pt-3 flex flex-wrap gap-2">
           {p.link ? (
-            <a
-              href={p.link}
-              target="_blank"
-              rel="noreferrer"
-              className="liquid-glass inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] text-white/90 hover:text-white transition-colors"
-            >
-              {p.linkLabel ?? 'Visit the site'} <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-            </a>
+            <>
+              <a
+                href={p.link}
+                target="_blank"
+                rel="noreferrer"
+                className="liquid-glass inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] text-white/90 hover:text-white transition-colors"
+              >
+                {p.linkLabel ?? 'Visit the site'} <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+              </a>
+              {p.secondaryLink && (
+                <a
+                  href={p.secondaryLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-2 text-[13px] text-white/70 hover:border-white/30 hover:text-white transition-colors"
+                >
+                  {p.secondaryLinkLabel ?? 'View source'} <Code2 className="h-3.5 w-3.5" strokeWidth={1.5} />
+                </a>
+              )}
+            </>
           ) : (
             <span className="inline-flex items-center gap-2 text-[13px] text-white/50">
               <span className="h-1.5 w-1.5 rounded-full bg-amber-300/80 pulse-dot" /> in the process
@@ -271,7 +289,7 @@ function Projects() {
             Built with AI, shipped for real.
           </h1>
           <p className="mt-2 text-sm md:text-[15px] leading-[1.6] text-white/60">
-            One problem, one solution, one link each. Scroll sideways.
+            One problem, one solution, shipped in public. Scroll sideways.
           </p>
         </div>
         <div className="hidden sm:flex gap-2">
