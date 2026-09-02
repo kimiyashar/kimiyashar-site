@@ -5,8 +5,12 @@ export type Project = {
   solution: string
   link?: string
   linkLabel?: string
+  secondaryLink?: string
+  secondaryLinkLabel?: string
   status?: string
   shot?: string
+  detailShot?: string
+  detailLabel?: string
   tint: string
 }
 
@@ -14,11 +18,15 @@ export const PROJECTS: Project[] = [
   {
     name: 'Caffeine Toggle',
     tag: 'macOS Control Center utility',
-    problem: 'Closing a MacBook lid can kill the AI agents, builds, downloads, and terminal jobs you expected to finish.',
-    solution: 'Caffeine Toggle puts one clear switch in macOS Control Center to keep long-running work alive with the lid closed, then restore normal sleep when you turn it off.',
-    link: 'https://github.com/kimiyashar/caffeine-toggle',
-    linkLabel: 'View on GitHub',
+    problem: 'The Terminal caffeinate command is invisible, easy to forget, and does not normally keep a Mac awake through lid closure.',
+    solution: 'Caffeine Toggle adds one seamless switch to macOS Control Center. Turn it on to keep long-running work alive with the lid closed; turn it off to restore normal sleep.',
+    link: 'https://kimiyashar.github.io/caffeine-toggle/',
+    linkLabel: 'Visit the site',
+    secondaryLink: 'https://github.com/kimiyashar/caffeine-toggle',
+    secondaryLinkLabel: 'View on GitHub',
     shot: '/shots/caffeine-toggle.jpg',
+    detailShot: '/shots/caffeine-menu-bar.png',
+    detailLabel: 'menu bar',
     tint: '#303236',
   },
   {
