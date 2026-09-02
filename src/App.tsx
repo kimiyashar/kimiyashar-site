@@ -49,9 +49,31 @@ function SectionLabel({ text, align = 'center' }: { text: string; align?: 'cente
   )
 }
 
+// every page scrolls under the fixed nav, so the scrim is global, not Home-only
+function useNavScrim() {
+  useEffect(() => {
+    const root = document.documentElement
+    let raf = 0
+    const update = () => {
+      raf = 0
+      root.style.setProperty('--nav-s', Math.min(1, window.scrollY / 80).toFixed(3))
+    }
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update) }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      cancelAnimationFrame(raf)
+      root.style.removeProperty('--nav-s')
+    }
+  }, [])
+}
+
 function Nav({ page, go }: { page: Page; go: (p: Page) => void }) {
+  useNavScrim()
   return (
     <nav className="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-4 sm:px-6 md:px-10 lg:px-14 py-4">
+      <div className="nav-scrim pointer-events-none absolute inset-x-0 top-0 h-24 -z-10" aria-hidden="true" />
       <button
         onClick={() => go('home')}
         className="hidden md:block text-[15px] tracking-tight text-white/90 hover:text-white transition-colors"
@@ -86,8 +108,48 @@ function Nav({ page, go }: { page: Page; go: (p: Page) => void }) {
 
 /* ---------------- HOME ---------------- */
 
+// DRAFT — Kimi to replace. This is my placeholder wording, not hers.
+const SEM_CAPTION =
+  'A silicon wafer I put under the SEM after cycling. At 990× the edge stops ' +
+  'being a line and turns into a coastline.'
+
+function useSemScroll() {
+  useEffect(() => {
+    const root = document.documentElement
+    let raf = 0
+    const clamp01 = (n: number) => Math.min(1, Math.max(0, n))
+    const update = () => {
+      raf = 0
+      const max = root.scrollHeight - window.innerHeight
+      const p = max > 8 ? clamp01(window.scrollY / max) : 0
+      root.style.setProperty('--sem-p', p.toFixed(4))
+
+      // caption reveals off the stage's own entry, not page scroll, so the fade
+      // lands on screen instead of below the fold — full at the moment it pins
+      const stage = document.querySelector('.sem-stage')
+      const h = window.innerHeight
+      const entry = stage ? (h - stage.getBoundingClientRect().top) / h : 0
+      root.style.setProperty('--sem-c', clamp01((entry - 0.72) / 0.34).toFixed(4))
+    }
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update) }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      cancelAnimationFrame(raf)
+      // leaving Home resets the background to its static frame
+      root.style.removeProperty('--sem-p')
+      root.style.removeProperty('--sem-c')
+    }
+  }, [])
+}
+
 function Home({ go }: { go: (p: Page) => void }) {
+  useSemScroll()
   return (
+    <>
     <main className="min-h-screen px-4 sm:px-6 md:px-10 lg:px-14 pt-24 pb-10 flex flex-col">
       <div className="max-w-3xl fade-up">
         <h1 className="text-[28px] sm:text-3xl md:text-4xl lg:text-[44px] leading-[1.15] font-normal tracking-tight">
@@ -201,6 +263,22 @@ function Home({ go }: { go: (p: Page) => void }) {
         </button>
       </div>
     </main>
+
+    {/* SEM specimen reveal — scroll room that the background zooms into */}
+    <section className="sem-stage relative h-[140vh]">
+      {/* sticky so the caption holds on screen while the zoom finishes behind it */}
+      <div className="sticky top-0 h-screen flex items-end px-4 sm:px-6 md:px-10 lg:px-14 pb-[12vh]">
+        <figure className="sem-caption max-w-lg m-0 rounded-2xl bg-black/45 backdrop-blur-[2px] p-5 md:p-6">
+          <figcaption className="text-white/55 text-[13.5px] leading-[1.65] font-light">
+            {SEM_CAPTION}
+          </figcaption>
+          <div className="mt-3 pl-3 border-l border-white/20 font-mono uppercase text-[10.5px] tracking-[0.14em] text-white/40">
+            Si wafer edge / after cycling / 990&times; / BSD 15&nbsp;kV
+          </div>
+        </figure>
+      </div>
+    </section>
+    </>
   )
 }
 

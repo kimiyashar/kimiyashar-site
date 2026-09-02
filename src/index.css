@@ -9,21 +9,59 @@
 html, body, #root { height: 100%; }
 body { background: #0a0a0a; color: #fff; margin: 0; }
 
-/* topographic contour background, fixed behind everything */
+/* SEM background: silicon wafer edge, 990x. Fixed behind everything.
+   --sem-p is scroll progress (0..1), driven by useSemScroll() on Home only.
+   Everywhere else it stays 0, which is the static resting frame. */
+:root { --sem-p: 0; --sem-c: 0; }
+
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: url('/topo.svg');
+  background-image: url('/sem/wafer-edge.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: left bottom;
   background-repeat: no-repeat;
-  opacity: 0.13;
-  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 38%, #000 45%, transparent 100%);
-  mask-image: radial-gradient(ellipse 90% 80% at 50% 38%, #000 45%, transparent 100%);
+  /* origin sits on the wafer edge so the zoom pushes into the specimen,
+     not into the empty black corner */
+  transform-origin: 30% 66%;
+  transform: scale(calc(1 + 0.48 * var(--sem-p)));
+  opacity: calc(0.22 + 0.16 * var(--sem-p));
+  -webkit-mask-image: radial-gradient(
+    ellipse calc(120% + 70% * var(--sem-p)) calc(110% + 70% * var(--sem-p)) at 22% 78%,
+    #000 calc(30% + 30% * var(--sem-p)), transparent 92%);
+  mask-image: radial-gradient(
+    ellipse calc(120% + 70% * var(--sem-p)) calc(110% + 70% * var(--sem-p)) at 22% 78%,
+    #000 calc(30% + 30% * var(--sem-p)), transparent 92%);
+  will-change: transform, opacity;
 }
+
+/* caption fades up over the last stretch of the reveal */
+.sem-caption {
+  opacity: var(--sem-c, 0);
+  transform: translateY(calc(16px * (1 - var(--sem-c))));
+  will-change: opacity, transform;
+}
+
+/* the fixed nav has no backdrop, so content scrolling under it collides with
+   the nav text. --nav-s saturates over the first 80px of scroll (not page
+   progress) so the scrim is at full strength the moment anything is underneath. */
+.nav-scrim {
+  opacity: var(--nav-s, 0);
+  background: linear-gradient(to bottom,
+    rgba(10, 10, 10, 0.96) 0%, rgba(10, 10, 10, 0.88) 45%, transparent 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: opacity 0.18s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before { transform: none; }
+  .sem-caption { opacity: 1; transform: none; }
+}
+
 #root { position: relative; z-index: 1; }
 
 /* liquid glass */
