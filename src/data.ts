@@ -12,6 +12,16 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
+    name: 'Caffeine Toggle',
+    tag: 'macOS Control Center utility',
+    problem: 'Closing a MacBook lid can kill the AI agents, builds, downloads, and terminal jobs you expected to finish.',
+    solution: 'Caffeine Toggle puts one clear switch in macOS Control Center to keep long-running work alive with the lid closed, then restore normal sleep when you turn it off.',
+    link: 'https://github.com/kimiyashar/caffeine-toggle',
+    linkLabel: 'View on GitHub',
+    shot: '/shots/caffeine-toggle.jpg',
+    tint: '#303236',
+  },
+  {
     name: 'DormView',
     tag: '3D dorm planner',
     problem: "You can't tell if your fridge, futon, and desk setup will actually fit in your dorm until move-in day.",
