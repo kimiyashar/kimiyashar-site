@@ -16,6 +16,16 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
+    name: 'Instax Photo Booth',
+    tag: 'raspberry pi + instant film',
+    problem: 'Renting a photo booth costs hundreds a night, and the cheap ones hand you a QR code instead of a photograph.',
+    solution: 'A self-contained Raspberry Pi booth with a touchscreen and camera. Tap the screen, pose through a 3-2-1 countdown, and it prints on Instax film over Bluetooth. No laptop, no internet.',
+    link: 'https://github.com/kimiyashar/instax-photobooth',
+    linkLabel: 'View on GitHub',
+    shot: '/shots/photobooth.jpg',
+    tint: '#43303c',
+  },
+  {
     name: 'Caffeine Toggle',
     tag: 'macOS Control Center utility',
     problem: 'The Terminal caffeinate command is invisible, easy to forget, and does not normally keep a Mac awake through lid closure.',
