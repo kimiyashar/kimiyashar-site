@@ -592,7 +592,7 @@ function Resume() {
       <div className="flex items-end justify-between pb-4 fade-up">
         <div>
           <SectionLabel text="Resume" align="start" />
-          <p className="mt-3 text-sm md:text-[15px] text-white/60">Last updated July 2026</p>
+          <p className="mt-3 text-sm md:text-[15px] text-white/60">Last updated September 2026</p>
         </div>
         <div className="flex gap-2">
           <a
