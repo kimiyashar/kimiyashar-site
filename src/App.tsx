@@ -386,7 +386,7 @@ function Home({ go }: { go: (p: Page) => void }) {
         <figure className="sem-inset m-0">
           <div className="sem-inset-frame">
             <img
-              src="/sem/inset-7300x.jpg"
+              src="/sem/pyramid-texture-7300x.jpg"
               alt="Anti-reflective pyramid surface texture etched into the silicon wafer, at 7,300x magnification"
             />
             <span className="sem-scalebar"><i /><em>20&nbsp;&micro;m</em></span>
