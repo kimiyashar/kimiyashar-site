@@ -218,8 +218,12 @@ body::before {
 /* on narrow screens the leader has nowhere to run — drop it, keep the plate */
 @media (max-width: 780px) {
   .sem-leader { display: none; }
-  /* clears the nav pill, which the 8vh version sat tight under */
-  .sem-inset { top: calc(8vh + 20px); right: auto; left: max(4vw, 1rem); width: min(62vw, 250px); }
+  /* clears the nav pill, which the 8vh version sat tight under. Wider than the
+     old 250px because the caption now lives on the plate — at 250px it ate two
+     thirds of the micrograph */
+  .sem-inset { top: calc(8vh + 20px); right: auto; left: max(4vw, 1rem); width: min(74vw, 300px); }
+  .sem-inset-text { gap: 7px; }
+  .sem-inset-cap { font-size: 9.5px; line-height: 1.45; }
 }
 
 @media (prefers-reduced-motion: reduce) {
