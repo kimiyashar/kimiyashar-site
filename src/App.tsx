@@ -389,14 +389,16 @@ function Home({ go }: { go: (p: Page) => void }) {
               src="/sem/pyramid-texture-7300x.jpg"
               alt="Anti-reflective pyramid surface texture etched into the silicon wafer, at 7,300x magnification"
             />
-            <span className="sem-scalebar"><i /><em>20&nbsp;&micro;m</em></span>
-          </div>
-          <div className="sem-inset-text">
-            <figcaption className="sem-inset-cap">
-              Anti-reflective pyramid surface texture etched into the silicon wafer,
-              shown at <span className="whitespace-nowrap">7,300&times;</span> magnification
-              and imaged via SEM at SLAC National Accelerator Laboratory.
-            </figcaption>
+            {/* bar and caption both ride on the micrograph — a caption in its own
+                panel reads as UI chrome rather than an annotation of the specimen */}
+            <div className="sem-inset-text">
+              <span className="sem-scalebar"><i /><em>20&nbsp;&micro;m</em></span>
+              <figcaption className="sem-inset-cap">
+                Anti-reflective pyramid surface texture etched into the silicon wafer,
+                shown at <span className="whitespace-nowrap">7,300&times;</span> magnification
+                and imaged via SEM at SLAC National Accelerator Laboratory.
+              </figcaption>
+            </div>
           </div>
         </figure>
 
@@ -406,8 +408,8 @@ function Home({ go }: { go: (p: Page) => void }) {
         <span className="sem-fieldbar sem-fieldbar--stage"><i /><em>50&nbsp;&micro;m</em></span>
 
         <div className="absolute inset-x-0 bottom-0 flex items-end px-4 sm:px-6 md:px-10 lg:px-14 pb-[12vh]">
-          <figure className="sem-caption max-w-lg m-0 p-5 md:p-6">
-            <figcaption className="text-white/[0.78] text-[13.5px] leading-[1.65] font-light">
+          <figure className="sem-caption max-w-lg m-0">
+            <figcaption className="sem-caption-text text-[13.5px] leading-[1.65] font-light">
               Single-crystal silicon wafer at 990&times; magnification, etched
               overnight in 2&nbsp;M KOH and imaged via SEM at SLAC National
               Accelerator Laboratory.
