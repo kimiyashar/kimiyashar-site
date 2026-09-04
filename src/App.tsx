@@ -78,7 +78,7 @@ function Nav({ page, go }: { page: Page; go: (p: Page) => void }) {
         onClick={() => go('home')}
         className="hidden md:block text-[15px] tracking-tight text-white/90 hover:text-white transition-colors"
       >
-        kimi yashar
+        Kimi Yashar
       </button>
       <div className="liquid-glass rounded-full flex items-center gap-0.5 sm:gap-1 p-1 mx-auto md:mx-0">
         {PAGES.map((p) => (
@@ -237,9 +237,7 @@ function useSemScroll() {
 }
 
 function Home({ go }: { go: (p: Page) => void }) {
-  useSemScroll()
   return (
-    <>
     <main className="min-h-screen px-4 sm:px-6 md:px-10 lg:px-14 pt-24 pb-10 flex flex-col">
       <div className="max-w-3xl fade-up">
         <h1 className="text-[28px] sm:text-3xl md:text-4xl lg:text-[44px] leading-[1.15] font-normal tracking-tight">
@@ -353,8 +351,13 @@ function Home({ go }: { go: (p: Page) => void }) {
         </button>
       </div>
     </main>
+  )
+}
 
-    {/* SEM specimen reveal — scroll room that the background zooms into */}
+function SemReveal() {
+  useSemScroll()
+  return (
+    /* SEM specimen reveal — scroll room that the background zooms into */
     <section className="sem-stage relative h-[140vh]">
       {/* sticky so the caption holds on screen while the zoom finishes behind it */}
       <div className="sticky top-0 h-screen px-4 sm:px-6 md:px-10 lg:px-14">
@@ -405,7 +408,6 @@ function Home({ go }: { go: (p: Page) => void }) {
         </div>
       </div>
     </section>
-    </>
   )
 }
 
@@ -638,6 +640,7 @@ export default function App() {
       {page === 'projects' && <Projects />}
       {page === 'community' && <Community />}
       {page === 'resume' && <Resume />}
+      <SemReveal />
     </div>
   )
 }
