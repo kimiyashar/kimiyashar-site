@@ -9,6 +9,7 @@ export type Project = {
   secondaryLinkLabel?: string
   status?: string
   shot?: string
+  shots?: string[]
   detailShot?: string
   detailLabel?: string
   tint: string
@@ -22,7 +23,12 @@ export const PROJECTS: Project[] = [
     solution: 'A self-contained Raspberry Pi booth with a touchscreen and camera. Tap the screen, pose through a 3-2-1 countdown, and it prints on Instax film over Bluetooth. No laptop, no internet.',
     link: 'https://github.com/kimiyashar/instax-photobooth',
     linkLabel: 'View on GitHub',
-    shot: '/shots/photobooth.jpg',
+    shots: [
+      '/shots/photobooth-party.jpg',
+      '/shots/photobooth-wide.jpg',
+      '/shots/photobooth-live.jpg',
+      '/shots/photobooth-hardware.jpg',
+    ],
     tint: '#43303c',
   },
   {
@@ -46,6 +52,7 @@ export const PROJECTS: Project[] = [
     solution: 'DormView loads a to-scale 3D model of your exact room so you can arrange, recolor, and save a layout before you buy a thing.',
     link: 'https://dormview.vercel.app',
     shot: '/shots/dormview.jpg',
+    status: 'still tweaking',
     tint: '#324444',
   },
   {

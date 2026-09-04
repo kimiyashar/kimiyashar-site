@@ -17,7 +17,7 @@ type Page = 'home' | 'projects' | 'community' | 'resume'
 
 const PAGES: { id: Page; label: string; short: string }[] = [
   { id: 'home', label: 'Home', short: 'Home' },
-  { id: 'projects', label: 'AI Projects', short: 'Projects' },
+  { id: 'projects', label: 'Projects', short: 'Projects' },
   { id: 'community', label: 'Community', short: 'Community' },
   { id: 'resume', label: 'Resume', short: 'Resume' },
 ]
@@ -281,10 +281,10 @@ function Home({ go }: { go: (p: Page) => void }) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/40" />
           <div className="relative z-10 h-full flex flex-col p-5 md:p-6">
-            <SectionLabel text="AI Projects" align="start" />
+            <SectionLabel text="Projects" align="start" />
             <div className="mt-auto">
               <div className="text-xl md:text-2xl font-light tracking-tight leading-snug">
-                AI Projects
+                Projects
               </div>
               <div className="text-white/70 text-[13px] mt-1">
                 that I built, and now use everyday
@@ -414,13 +414,52 @@ function SemReveal() {
 /* ---------------- PROJECTS ---------------- */
 
 function ProjectCard({ p }: { p: Project }) {
+  const [shotIndex, setShotIndex] = useState(0)
+  const galleryShot = p.shots?.[shotIndex]
+  const changeShot = (direction: 1 | -1) => {
+    if (!p.shots) return
+    setShotIndex((current) => (current + direction + p.shots!.length) % p.shots!.length)
+  }
+
   return (
     <div
       className="relative shrink-0 w-[86vw] sm:w-[520px] md:w-[560px] rounded-2xl overflow-hidden noise-overlay flex flex-col"
       style={{ background: p.tint }}
     >
       <div className="relative h-52 sm:h-60 bg-black/40">
-        {p.shot ? (
+        {galleryShot ? (
+          <>
+            <img src={galleryShot} alt="" aria-hidden="true" className="absolute -inset-3 h-[calc(100%+1.5rem)] w-[calc(100%+1.5rem)] object-cover blur-xl opacity-35 scale-110" />
+            <img src={galleryShot} alt={`${p.name} — photo ${shotIndex + 1} of ${p.shots!.length}`} className="absolute inset-0 h-full w-full object-contain" />
+            <button
+              type="button"
+              aria-label="Previous Photo Booth photo"
+              onClick={() => changeShot(-1)}
+              className="absolute left-3 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/35 text-white/85 shadow-lg backdrop-blur-md hover:bg-black/50 hover:text-white"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </button>
+            <button
+              type="button"
+              aria-label="Next Photo Booth photo"
+              onClick={() => changeShot(1)}
+              className="absolute right-3 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/35 text-white/85 shadow-lg backdrop-blur-md hover:bg-black/50 hover:text-white"
+            >
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </button>
+            <div className="absolute left-1/2 top-3 z-20 flex -translate-x-1/2 gap-1.5" aria-label={`Photo ${shotIndex + 1} of ${p.shots!.length}`}>
+              {p.shots!.map((shot, index) => (
+                <button
+                  type="button"
+                  key={shot}
+                  aria-label={`Show Photo Booth photo ${index + 1}`}
+                  onClick={() => setShotIndex(index)}
+                  className={`h-1.5 rounded-full transition-all ${index === shotIndex ? 'w-5 bg-white' : 'w-1.5 bg-white/45 hover:bg-white/70'}`}
+                />
+              ))}
+            </div>
+          </>
+        ) : p.shot ? (
           <img src={p.shot} alt={p.name} className="absolute inset-0 h-full w-full object-cover object-top" />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
@@ -491,12 +530,12 @@ function Projects() {
     <main className="min-h-screen pt-24 pb-10 flex flex-col">
       <div className="px-4 sm:px-6 md:px-10 lg:px-14 flex items-end justify-between fade-up">
         <div className="max-w-2xl">
-          <SectionLabel text="AI Projects" align="start" />
+          <SectionLabel text="Projects" align="start" />
           <h1 className="mt-3 text-[26px] sm:text-3xl md:text-4xl leading-[1.15] tracking-tight">
-            Built with AI, shipped for real.
+            Cool things I wanted.
           </h1>
           <p className="mt-2 text-sm md:text-[15px] leading-[1.6] text-white/60">
-            One problem, one solution, shipped in public. Scroll sideways.
+            All projects were started during summer 2026 or later.
           </p>
         </div>
         <div className="hidden sm:flex gap-2">
