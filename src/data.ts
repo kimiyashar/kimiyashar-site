@@ -10,6 +10,8 @@ export type Project = {
   status?: string
   shot?: string
   shots?: string[]
+  schematic?: string
+  actionShot?: string
   detailShot?: string
   detailLabel?: string
   tint: string
@@ -23,7 +25,11 @@ export const PROJECTS: Project[] = [
     solution: 'A Raspberry Pi 4, 7-inch touch display, and 12 MP Camera Module 3 NoIR built into a hollow book. Tap the screen for a 3-2-1 countdown; each 3:4 portrait is sent over Bluetooth to an Instax Mini Link—no laptop or internet.',
     link: 'https://github.com/kimiyashar/instax-photobooth',
     linkLabel: 'View on GitHub',
+    schematic: '/shots/photobooth-schematic.png',
+    actionShot: '/shots/photobooth-action.jpg',
     shots: [
+      '/shots/photobooth-schematic.png',
+      '/shots/photobooth-action.jpg',
       '/shots/photobooth-party.jpg',
       '/shots/photobooth-wide.jpg',
       '/shots/photobooth-live.jpg',

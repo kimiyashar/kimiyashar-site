@@ -25,11 +25,27 @@ test('Projects uses the requested label and intro copy', () => {
   assert.doesNotMatch(app, /Built with AI, shipped for real\./)
 })
 
-test('Photo Booth supports and uses a four-photo gallery', () => {
+test('Photo Booth supports and uses a six-image gallery', () => {
   const data = readFileSync(new URL('../src/data.ts', import.meta.url), 'utf8')
+  const photoBooth = data.slice(data.indexOf("name: 'Instax Photo Booth'"), data.indexOf("name: 'Caffeine Toggle'"))
+  const shotsStart = photoBooth.indexOf('shots: [')
+  const shots = photoBooth.slice(shotsStart, photoBooth.indexOf('],', shotsStart))
   assert.match(data, /shots\?: string\[\]/)
-  assert.match(data, /shots:\s*\[([\s\S]*?photobooth-[\s\S]*?){4}\]/)
+  assert.equal((shots.match(/'\/shots\/photobooth-/g) ?? []).length, 6)
   assert.match(app, /function ProjectCard[\s\S]*useState/)
+})
+
+test('Photo Booth leads with a downloadable schematic and action shortcut', () => {
+  const data = readFileSync(new URL('../src/data.ts', import.meta.url), 'utf8')
+  const photoBooth = data.slice(data.indexOf("name: 'Instax Photo Booth'"), data.indexOf("name: 'Caffeine Toggle'"))
+  assert.match(data, /schematic\?: string/)
+  assert.match(data, /actionShot\?: string/)
+  assert.match(photoBooth, /schematic: '\/shots\/photobooth-schematic\.png'/)
+  assert.match(photoBooth, /actionShot: '\/shots\/photobooth-action\.jpg'/)
+  assert.match(photoBooth, /shots:\s*\[\s*'\/shots\/photobooth-schematic\.png',\s*'\/shots\/photobooth-action\.jpg'/)
+  assert.match(app, /download="Instax-Photo-Booth-Schematic\.png"/)
+  assert.match(app, /Download schematic/)
+  assert.match(app, /See it in action/)
 })
 
 test('Photo Booth caption matches the documented build schematic', () => {

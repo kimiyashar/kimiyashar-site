@@ -420,17 +420,33 @@ function ProjectCard({ p }: { p: Project }) {
     if (!p.shots) return
     setShotIndex((current) => (current + direction + p.shots!.length) % p.shots!.length)
   }
+  const showActionShot = () => {
+    if (!p.shots || !p.actionShot) return
+    const index = p.shots.indexOf(p.actionShot)
+    if (index >= 0) setShotIndex(index)
+  }
 
   return (
     <div
-      className="relative shrink-0 w-[86vw] sm:w-[520px] md:w-[560px] rounded-2xl overflow-hidden noise-overlay flex flex-col"
+      className={`relative shrink-0 rounded-2xl overflow-hidden noise-overlay flex flex-col ${p.schematic ? 'w-[92vw] sm:w-[620px] md:w-[660px]' : 'w-[86vw] sm:w-[520px] md:w-[560px]'}`}
       style={{ background: p.tint }}
     >
-      <div className="relative h-52 sm:h-60 bg-black/40">
+      <div className={`relative bg-black/40 ${p.schematic ? 'aspect-[4/3]' : 'h-52 sm:h-60'}`}>
         {galleryShot ? (
           <>
             <img src={galleryShot} alt="" aria-hidden="true" className="absolute -inset-3 h-[calc(100%+1.5rem)] w-[calc(100%+1.5rem)] object-cover blur-xl opacity-35 scale-110" />
-            <img src={galleryShot} alt={`${p.name} — photo ${shotIndex + 1} of ${p.shots!.length}`} className="absolute inset-0 h-full w-full object-contain" />
+            {galleryShot === p.schematic ? (
+              <a
+                href={p.schematic}
+                download="Instax-Photo-Booth-Schematic.png"
+                aria-label="Download Photo Booth schematic"
+                className="absolute inset-0 z-10"
+              >
+                <img src={galleryShot} alt={`${p.name} schematic`} className="h-full w-full object-contain" />
+              </a>
+            ) : (
+              <img src={galleryShot} alt={`${p.name} — photo ${shotIndex + 1} of ${p.shots!.length}`} className="absolute inset-0 h-full w-full object-contain" />
+            )}
             <button
               type="button"
               aria-label="Previous Photo Booth photo"
@@ -466,14 +482,14 @@ function ProjectCard({ p }: { p: Project }) {
             <span className="uppercase tracking-[0.3em] text-[11px] text-white/40">in the oven</span>
           </div>
         )}
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
         {p.detailShot && (
           <div className="absolute top-3 right-3 flex items-center gap-1.5 rounded-full bg-white/90 p-1 text-black shadow-lg shadow-black/15 backdrop-blur-sm sm:py-1 sm:pl-1 sm:pr-2.5">
             <img src={p.detailShot} alt="" className="h-8 w-8 rounded-full object-cover" />
             <span className="hidden text-[9px] font-medium uppercase tracking-[0.14em] sm:inline">{p.detailLabel}</span>
           </div>
         )}
-        <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
+        <div className="pointer-events-none absolute bottom-3 left-4 right-4 z-10 flex items-end justify-between">
           <div>
             <div className="text-lg tracking-tight drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">{p.name}</div>
             <div className="text-[11px] uppercase tracking-[0.18em] text-white/75 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">{p.tag}</div>
@@ -512,6 +528,25 @@ function ProjectCard({ p }: { p: Project }) {
             <span className="inline-flex items-center gap-2 text-[13px] text-white/50">
               <span className="h-1.5 w-1.5 rounded-full bg-amber-300/80 pulse-dot" /> in the process
             </span>
+          )}
+          {p.schematic && (
+            <a
+              href={p.schematic}
+              download="Instax-Photo-Booth-Schematic.png"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1.5 text-[12px] text-white/75 hover:border-white/30 hover:text-white transition-colors"
+            >
+              <img src={p.schematic} alt="" className="h-6 w-8 rounded object-cover" />
+              Download schematic <Download className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </a>
+          )}
+          {p.actionShot && (
+            <button
+              type="button"
+              onClick={showActionShot}
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-2 text-[13px] text-white/75 hover:border-white/30 hover:text-white transition-colors"
+            >
+              See it in action <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </button>
           )}
         </div>
       </div>
