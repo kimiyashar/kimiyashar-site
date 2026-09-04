@@ -654,11 +654,6 @@ function Resume() {
             alt="Kimi Yashar resume, page 1. Click to open the full PDF."
             className="w-full rounded-2xl shadow-2xl shadow-black/60 hover:opacity-95 transition-opacity"
           />
-          <img
-            src="/resume-p2.jpg"
-            alt="Kimi Yashar resume, page 2. Click to open the full PDF."
-            className="w-full rounded-2xl shadow-2xl shadow-black/60 hover:opacity-95 transition-opacity"
-          />
         </a>
       </div>
     </main>

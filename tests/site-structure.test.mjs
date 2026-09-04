@@ -49,3 +49,10 @@ test('DormView is marked still tweaking', () => {
   const dormView = data.slice(data.indexOf("name: 'DormView'"), data.indexOf("name: 'Forkcast'"))
   assert.match(dormView, /status: 'still tweaking'/)
 })
+
+test('Resume renders the current one-page preview', () => {
+  const resume = app.slice(app.indexOf('function Resume()'), app.indexOf('/* ---------------- APP ---------------- */'))
+  assert.match(resume, /src="\/resume-p1\.jpg"/)
+  assert.doesNotMatch(resume, /resume-p2\.jpg/)
+  assert.equal((resume.match(/Kimi Yashar resume, page \d/g) ?? []).length, 1, 'expected one image with matching alt text')
+})
