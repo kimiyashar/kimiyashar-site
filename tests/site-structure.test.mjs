@@ -17,6 +17,10 @@ test("the top-left brand introduces Kimi", () => {
   assert.doesNotMatch(nav, />\s*Kimi Yashar\s*</)
 })
 
+test('the reach-me card has no floating arrow button', () => {
+  assert.doesNotMatch(app, /liquid-glass absolute top-4 right-4 h-9 w-9/)
+})
+
 test('Projects uses the requested label and intro copy', () => {
   assert.match(app, /label: 'Projects'/)
   assert.match(app, /<SectionLabel text="Projects"/)

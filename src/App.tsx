@@ -333,12 +333,6 @@ function Home({ go }: { go: (p: Page) => void }) {
               <Briefcase className="h-4 w-4" strokeWidth={1.5} /> LinkedIn
             </a>
           </div>
-          <a
-            href={`mailto:${CONTACT.email}`}
-            className="liquid-glass absolute top-4 right-4 h-9 w-9 rounded-full flex items-center justify-center text-white/85 hover:text-white z-10"
-          >
-            <ArrowUpRight className="h-4 w-4" strokeWidth={1.5} />
-          </a>
         </div>
         <button onClick={() => go('resume')} className="liquid-glass rounded-2xl p-5 md:p-6 text-left group">
           <SectionLabel text="Resume" align="start" />
