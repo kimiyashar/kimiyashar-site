@@ -38,7 +38,7 @@ export const PROJECTS: Project[] = [
     name: 'Caffeine Toggle',
     tag: 'macOS Control Center utility',
     problem: 'The Terminal caffeinate command is invisible, easy to forget, and does not normally keep a Mac awake through lid closure.',
-    solution: 'Caffeine Toggle adds one seamless Control Center switch plus Timer and Repeat. Single-click to toggle now; double-click to run for the next 30 minutes–8 hours or choose weekday, weekend, and custom schedules.',
+    solution: 'Caffeine Toggle adds one seamless Control Center switch plus Timer and Calendar-style Repeat. Single-click to toggle now; double-click to run for 30 minutes–8 hours or schedule daily, weekly, monthly, yearly, and custom recurrences.',
     link: 'https://kimiyashar.github.io/caffeine-toggle/',
     linkLabel: 'Visit the site',
     secondaryLink: 'https://github.com/kimiyashar/caffeine-toggle',
