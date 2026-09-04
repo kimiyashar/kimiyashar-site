@@ -20,7 +20,7 @@ export const PROJECTS: Project[] = [
     name: 'Instax Photo Booth',
     tag: 'raspberry pi + instant film',
     problem: 'Renting a photo booth costs hundreds a night, and the cheap ones hand you a QR code instead of a photograph.',
-    solution: 'A self-contained Raspberry Pi booth with a touchscreen and camera. Tap the screen, pose through a 3-2-1 countdown, and it prints on Instax film over Bluetooth. No laptop, no internet.',
+    solution: 'A Raspberry Pi 4, 7-inch touch display, and 12 MP Camera Module 3 NoIR built into a hollow book. Tap the screen for a 3-2-1 countdown; each 3:4 portrait is sent over Bluetooth to an Instax Mini Link—no laptop or internet.',
     link: 'https://github.com/kimiyashar/instax-photobooth',
     linkLabel: 'View on GitHub',
     shots: [

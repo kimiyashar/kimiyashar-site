@@ -32,6 +32,18 @@ test('Photo Booth supports and uses a four-photo gallery', () => {
   assert.match(app, /function ProjectCard[\s\S]*useState/)
 })
 
+test('Photo Booth caption matches the documented build schematic', () => {
+  const data = readFileSync(new URL('../src/data.ts', import.meta.url), 'utf8')
+  const photoBooth = data.slice(data.indexOf("name: 'Instax Photo Booth'"), data.indexOf("name: 'Caffeine Toggle'"))
+  assert.match(photoBooth, /Raspberry Pi 4/)
+  assert.match(photoBooth, /7-inch touch display/)
+  assert.match(photoBooth, /12 MP Camera Module 3 NoIR/)
+  assert.match(photoBooth, /hollow book/)
+  assert.match(photoBooth, /Instax Mini Link/)
+  assert.match(photoBooth, /Bluetooth/)
+  assert.match(photoBooth, /no laptop or internet/)
+})
+
 test('DormView is marked still tweaking', () => {
   const data = readFileSync(new URL('../src/data.ts', import.meta.url), 'utf8')
   const dormView = data.slice(data.indexOf("name: 'DormView'"), data.indexOf("name: 'Forkcast'"))
