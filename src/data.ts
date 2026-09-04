@@ -31,7 +31,6 @@ export const PROJECTS: Project[] = [
       '/shots/photobooth-schematic.png',
       '/shots/photobooth-action.jpg',
       '/shots/photobooth-party.jpg',
-      '/shots/photobooth-wide.jpg',
       '/shots/photobooth-live.jpg',
       '/shots/photobooth-hardware.jpg',
     ],

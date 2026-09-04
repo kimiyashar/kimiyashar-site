@@ -25,13 +25,13 @@ test('Projects uses the requested label and intro copy', () => {
   assert.doesNotMatch(app, /Built with AI, shipped for real\./)
 })
 
-test('Photo Booth supports and uses a six-image gallery', () => {
+test('Photo Booth supports and uses a five-image gallery without duplicate shots', () => {
   const data = readFileSync(new URL('../src/data.ts', import.meta.url), 'utf8')
   const photoBooth = data.slice(data.indexOf("name: 'Instax Photo Booth'"), data.indexOf("name: 'Caffeine Toggle'"))
   const shotsStart = photoBooth.indexOf('shots: [')
   const shots = photoBooth.slice(shotsStart, photoBooth.indexOf('],', shotsStart))
   assert.match(data, /shots\?: string\[\]/)
-  assert.equal((shots.match(/'\/shots\/photobooth-/g) ?? []).length, 6)
+  assert.equal((shots.match(/'\/shots\/photobooth-/g) ?? []).length, 5)
   assert.match(app, /function ProjectCard[\s\S]*useState/)
 })
 
