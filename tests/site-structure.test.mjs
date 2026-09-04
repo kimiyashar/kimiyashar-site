@@ -35,17 +35,15 @@ test('Photo Booth supports and uses a five-image gallery without duplicate shots
   assert.match(app, /function ProjectCard[\s\S]*useState/)
 })
 
-test('Photo Booth leads with a downloadable schematic and action shortcut', () => {
+test('Photo Booth leads with a downloadable schematic without a redundant action button', () => {
   const data = readFileSync(new URL('../src/data.ts', import.meta.url), 'utf8')
   const photoBooth = data.slice(data.indexOf("name: 'Instax Photo Booth'"), data.indexOf("name: 'Caffeine Toggle'"))
   assert.match(data, /schematic\?: string/)
-  assert.match(data, /actionShot\?: string/)
   assert.match(photoBooth, /schematic: '\/shots\/photobooth-schematic\.png'/)
-  assert.match(photoBooth, /actionShot: '\/shots\/photobooth-action\.jpg'/)
   assert.match(photoBooth, /shots:\s*\[\s*'\/shots\/photobooth-schematic\.png',\s*'\/shots\/photobooth-action\.jpg'/)
   assert.match(app, /download="Instax-Photo-Booth-Schematic\.png"/)
   assert.match(app, /Download schematic/)
-  assert.match(app, /See it in action/)
+  assert.doesNotMatch(app, /See it in action/)
 })
 
 test('Photo Booth caption matches the documented build schematic', () => {

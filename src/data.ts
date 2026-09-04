@@ -11,7 +11,6 @@ export type Project = {
   shot?: string
   shots?: string[]
   schematic?: string
-  actionShot?: string
   detailShot?: string
   detailLabel?: string
   tint: string
@@ -26,7 +25,6 @@ export const PROJECTS: Project[] = [
     link: 'https://github.com/kimiyashar/instax-photobooth',
     linkLabel: 'View on GitHub',
     schematic: '/shots/photobooth-schematic.png',
-    actionShot: '/shots/photobooth-action.jpg',
     shots: [
       '/shots/photobooth-schematic.png',
       '/shots/photobooth-action.jpg',

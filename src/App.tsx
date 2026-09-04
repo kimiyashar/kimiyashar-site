@@ -420,12 +420,6 @@ function ProjectCard({ p }: { p: Project }) {
     if (!p.shots) return
     setShotIndex((current) => (current + direction + p.shots!.length) % p.shots!.length)
   }
-  const showActionShot = () => {
-    if (!p.shots || !p.actionShot) return
-    const index = p.shots.indexOf(p.actionShot)
-    if (index >= 0) setShotIndex(index)
-  }
-
   return (
     <div
       className={`relative shrink-0 rounded-2xl overflow-hidden noise-overlay flex flex-col ${p.schematic ? 'w-[92vw] sm:w-[620px] md:w-[660px]' : 'w-[86vw] sm:w-[520px] md:w-[560px]'}`}
@@ -538,15 +532,6 @@ function ProjectCard({ p }: { p: Project }) {
               <img src={p.schematic} alt="" className="h-6 w-8 rounded object-cover" />
               Download schematic <Download className="h-3.5 w-3.5" strokeWidth={1.5} />
             </a>
-          )}
-          {p.actionShot && (
-            <button
-              type="button"
-              onClick={showActionShot}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-2 text-[13px] text-white/75 hover:border-white/30 hover:text-white transition-colors"
-            >
-              See it in action <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-            </button>
           )}
         </div>
       </div>
