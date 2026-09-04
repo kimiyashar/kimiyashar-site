@@ -78,7 +78,7 @@ function Nav({ page, go }: { page: Page; go: (p: Page) => void }) {
         onClick={() => go('home')}
         className="hidden md:block text-[15px] tracking-tight text-white/90 hover:text-white transition-colors"
       >
-        Kimi Yashar
+        Hi, I'm Kimi!
       </button>
       <div className="liquid-glass rounded-full flex items-center gap-0.5 sm:gap-1 p-1 mx-auto md:mx-0">
         {PAGES.map((p) => (

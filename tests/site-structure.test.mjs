@@ -11,9 +11,10 @@ test('the SEM scroll reveal is mounted once at app level for every route', () =>
   assert.equal((appComponent.match(/<SemReveal\s*\/>/g) ?? []).length, 1)
 })
 
-test('the top-left brand uses title case', () => {
-  assert.match(app, />\s*Kimi Yashar\s*<\/button>/)
-  assert.doesNotMatch(app, />\s*kimi yashar\s*<\/button>/)
+test("the top-left brand introduces Kimi", () => {
+  const nav = app.slice(app.indexOf('function Nav'), app.indexOf('/* ---------------- HOME'))
+  assert.match(nav, />\s*Hi, I'm Kimi!\s*</)
+  assert.doesNotMatch(nav, />\s*Kimi Yashar\s*</)
 })
 
 test('Projects uses the requested label and intro copy', () => {
