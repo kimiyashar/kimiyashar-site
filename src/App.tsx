@@ -437,7 +437,7 @@ function ProjectCard({ p }: { p: Project }) {
             )}
             <button
               type="button"
-              aria-label="Previous Photo Booth photo"
+              aria-label={`Previous ${p.name} photo`}
               onClick={() => changeShot(-1)}
               className="absolute left-3 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/35 text-white/85 shadow-lg backdrop-blur-md hover:bg-black/50 hover:text-white"
             >
@@ -445,7 +445,7 @@ function ProjectCard({ p }: { p: Project }) {
             </button>
             <button
               type="button"
-              aria-label="Next Photo Booth photo"
+              aria-label={`Next ${p.name} photo`}
               onClick={() => changeShot(1)}
               className="absolute right-3 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/35 text-white/85 shadow-lg backdrop-blur-md hover:bg-black/50 hover:text-white"
             >
@@ -456,7 +456,7 @@ function ProjectCard({ p }: { p: Project }) {
                 <button
                   type="button"
                   key={shot}
-                  aria-label={`Show Photo Booth photo ${index + 1}`}
+                  aria-label={`Show ${p.name} photo ${index + 1}`}
                   onClick={() => setShotIndex(index)}
                   className={`h-1.5 rounded-full transition-all ${index === shotIndex ? 'w-5 bg-white' : 'w-1.5 bg-white/45 hover:bg-white/70'}`}
                 />

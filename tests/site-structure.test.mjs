@@ -63,6 +63,26 @@ test('Photo Booth caption matches the documented build schematic', () => {
   assert.match(photoBooth, /no laptop or internet/)
 })
 
+test('Caffeine Toggle presents the current menu-bar-only 3.0 product', () => {
+  const data = readFileSync(new URL('../src/data.ts', import.meta.url), 'utf8')
+  const caffeine = data.slice(data.indexOf("name: 'Caffeine Toggle'"), data.indexOf("name: 'DormView'"))
+  assert.match(caffeine, /native macOS menu-bar app/)
+  assert.match(caffeine, /directly attached Timer and Schedule panel/)
+  assert.match(caffeine, /One Time, Every Day, Weekdays, and Custom/)
+  assert.match(caffeine, /shots:\s*\[/)
+  const shotsStart = caffeine.indexOf('shots: [')
+  const shots = caffeine.slice(shotsStart, caffeine.indexOf('],', shotsStart))
+  assert.equal((shots.match(/'\/shots\/caffeine-/g) ?? []).length, 5)
+  assert.doesNotMatch(caffeine, /Control Center/)
+  assert.doesNotMatch(caffeine, /monthly|yearly/i)
+})
+
+test('project gallery controls use each project name', () => {
+  assert.match(app, /aria-label={`Previous \${p\.name} photo`}/)
+  assert.match(app, /aria-label={`Next \${p\.name} photo`}/)
+  assert.match(app, /aria-label={`Show \${p\.name} photo \${index \+ 1}`}/)
+})
+
 test('DormView is marked still tweaking', () => {
   const data = readFileSync(new URL('../src/data.ts', import.meta.url), 'utf8')
   const dormView = data.slice(data.indexOf("name: 'DormView'"), data.indexOf("name: 'Forkcast'"))
