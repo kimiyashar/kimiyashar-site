@@ -37,8 +37,8 @@ export const PROJECTS: Project[] = [
   {
     name: 'Caffeine Toggle',
     tag: 'native macOS menu-bar app',
-    problem: 'The Terminal caffeinate command is invisible, easy to forget, and does not normally keep a Mac awake through lid closure.',
-    solution: 'Caffeine Toggle adds a one-click menu-bar mug plus a directly attached Timer and Schedule panel with One Time, Every Day, Weekdays, and Custom modes.',
+    problem: 'A little coffee that sits in your menu bar, so Claude can keep cooking even when your laptop is closed.',
+    solution: 'It keeps your Mac awake through lid closure, letting AI agents, music, downloads, and other long-running tasks keep going while you step away.',
     link: 'https://kimiyashar.github.io/caffeine-toggle/',
     linkLabel: 'Visit the site',
     secondaryLink: 'https://github.com/kimiyashar/caffeine-toggle',

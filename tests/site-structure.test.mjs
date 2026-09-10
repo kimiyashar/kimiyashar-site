@@ -21,6 +21,14 @@ test('the reach-me card has no floating arrow button', () => {
   assert.doesNotMatch(app, /liquid-glass absolute top-4 right-4 h-9 w-9/)
 })
 
+test('Caffeine Toggle explains lid-closed work in Kimi’s voice', () => {
+  const data = readFileSync(new URL('../src/data.ts', import.meta.url), 'utf8')
+  const caffeine = data.slice(data.indexOf("name: 'Caffeine Toggle'"), data.indexOf("name: 'DormView'"))
+  assert.match(caffeine, /A little coffee that sits in your menu bar, so Claude can keep cooking even when your laptop is closed\./)
+  assert.match(caffeine, /AI agents, music, downloads, and other long-running tasks/)
+  assert.doesNotMatch(caffeine, /Terminal caffeinate command/)
+})
+
 test('Projects uses the requested label and intro copy', () => {
   assert.match(app, /label: 'Projects'/)
   assert.match(app, /<SectionLabel text="Projects"/)
@@ -67,8 +75,6 @@ test('Caffeine Toggle presents the current menu-bar-only 3.0 product', () => {
   const data = readFileSync(new URL('../src/data.ts', import.meta.url), 'utf8')
   const caffeine = data.slice(data.indexOf("name: 'Caffeine Toggle'"), data.indexOf("name: 'DormView'"))
   assert.match(caffeine, /native macOS menu-bar app/)
-  assert.match(caffeine, /directly attached Timer and Schedule panel/)
-  assert.match(caffeine, /One Time, Every Day, Weekdays, and Custom/)
   assert.match(caffeine, /shots:\s*\[/)
   const shotsStart = caffeine.indexOf('shots: [')
   const shots = caffeine.slice(shotsStart, caffeine.indexOf('],', shotsStart))
