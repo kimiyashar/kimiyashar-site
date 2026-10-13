@@ -95,6 +95,27 @@ test('DormView is marked still tweaking', () => {
   assert.match(dormView, /status: 'still tweaking'/)
 })
 
+test('Forkcast is shown as under maintenance without a site link', () => {
+  const data = readFileSync(new URL('../src/data.ts', import.meta.url), 'utf8')
+  const forkcast = data.slice(data.indexOf("name: 'Forkcast'"), data.indexOf("name: 'Overhead'"))
+  assert.match(forkcast, /status: 'under maintenance'/)
+  assert.doesNotMatch(forkcast, /link:/)
+})
+
+test('the current-project list reflects active robotics builds', () => {
+  const data = readFileSync(new URL('../src/data.ts', import.meta.url), 'utf8')
+  const now = data.slice(data.indexOf('export const NOW'), data.indexOf('export const CONTACT'))
+  assert.match(now, /TartanAUV video compression/)
+  assert.match(now, /Raspberry Pi control build/)
+  assert.doesNotMatch(now, /This site/)
+})
+
+test('the contact card includes Kimi’s CMU email', () => {
+  const data = readFileSync(new URL('../src/data.ts', import.meta.url), 'utf8')
+  assert.match(data, /schoolEmail: 'kyashar@andrew\.cmu\.edu'/)
+  assert.match(app, /CONTACT\.schoolEmail/)
+})
+
 test('Resume renders the current one-page preview', () => {
   const resume = app.slice(app.indexOf('function Resume()'), app.indexOf('/* ---------------- APP ---------------- */'))
   assert.match(resume, /src="\/resume-p1\.jpg"/)

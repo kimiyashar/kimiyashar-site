@@ -69,8 +69,8 @@ export const PROJECTS: Project[] = [
     tag: 'dietary restaurant finder',
     problem: 'Finding a restaurant that fits your diet in an unfamiliar city is a scavenger hunt.',
     solution: 'Forkcast filters any city on Earth by vegetarian, vegan, gluten-free, halal, kosher, and more, with real photos, hours, and ratings.',
-    link: 'https://eatforkcast.vercel.app',
     shot: '/shots/forkcast.jpg',
+    status: 'under maintenance',
     tint: '#3a3244',
   },
   {
@@ -151,13 +151,15 @@ export const COMMUNITY: CommunityItem[] = [
 ]
 
 export const NOW = [
+  { label: 'TartanAUV video compression', detail: 'RGB and depth compression for underwater robotics' },
+  { label: 'Raspberry Pi control build', detail: 'new hardware project around control theory' },
   { label: 'Read to Me', detail: 'Safari extension that reads articles aloud' },
   { label: 'DormView', detail: '3D room planner for CMU dorms' },
-  { label: 'This site', detail: 'physics portfolio with SEM visuals' },
 ]
 
 export const CONTACT = {
   email: 'kimi@yasharfamily.com',
+  schoolEmail: 'kyashar@andrew.cmu.edu',
   github: 'https://github.com/kimiyashar',
   githubHandle: 'kimiyashar',
   linkedin: 'https://www.linkedin.com/in/kimiyashar/',

@@ -326,6 +326,9 @@ function Home({ go }: { go: (p: Page) => void }) {
             <a href={`mailto:${CONTACT.email}`} className="flex items-center gap-2 text-[13.5px] text-white/85 hover:text-white transition-colors">
               <Mail className="h-4 w-4" strokeWidth={1.5} /> {CONTACT.email}
             </a>
+            <a href={`mailto:${CONTACT.schoolEmail}`} className="flex items-center gap-2 text-[13.5px] text-white/85 hover:text-white transition-colors">
+              <Mail className="h-4 w-4" strokeWidth={1.5} /> {CONTACT.schoolEmail}
+            </a>
             <a href={CONTACT.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-[13.5px] text-white/85 hover:text-white transition-colors">
               <Code2 className="h-4 w-4" strokeWidth={1.5} /> github.com/{CONTACT.githubHandle}
             </a>
@@ -482,7 +485,7 @@ function ProjectCard({ p }: { p: Project }) {
             <div className="text-lg tracking-tight drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">{p.name}</div>
             <div className="text-[11px] uppercase tracking-[0.18em] text-white/75 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">{p.tag}</div>
           </div>
-          {p.status && (
+          {p.status && p.link && (
             <span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-amber-200/90">{p.status}</span>
           )}
         </div>
@@ -514,7 +517,7 @@ function ProjectCard({ p }: { p: Project }) {
             </>
           ) : (
             <span className="inline-flex items-center gap-2 text-[13px] text-white/50">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-300/80 pulse-dot" /> in the process
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-300/80 pulse-dot" /> {p.status ?? 'in the process'}
             </span>
           )}
           {p.schematic && (
