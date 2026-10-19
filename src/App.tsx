@@ -377,9 +377,9 @@ function SemReveal() {
                 panel reads as UI chrome rather than an annotation of the specimen */}
             <div className="sem-inset-text">
               <figcaption className="sem-inset-cap">
-                Anti-reflective pyramid surface texture etched into the silicon wafer,
-                shown at <span className="whitespace-nowrap">7,300&times;</span> magnification
-                and imaged via SEM at SLAC National Accelerator Laboratory.
+                Anti-reflective pyramid texture on a silicon wafer I etched and imaged
+                via SEM at SLAC National Accelerator Laboratory, shown at{' '}
+                <span className="whitespace-nowrap">7,300&times;</span> magnification.
               </figcaption>
             </div>
           </div>
@@ -388,9 +388,9 @@ function SemReveal() {
         <div className="absolute inset-x-0 bottom-0 flex items-end px-4 sm:px-6 md:px-10 lg:px-14 pb-[12vh]">
           <figure className="sem-caption max-w-lg m-0">
             <figcaption className="sem-caption-text text-[13.5px] leading-[1.65] font-light">
-              Single-crystal silicon wafer at 990&times; magnification, etched
-              overnight in 2&nbsp;M KOH and imaged via SEM at SLAC National
-              Accelerator Laboratory.
+              Single-crystal silicon wafer I etched overnight in 2&nbsp;M KOH and
+              imaged via SEM at SLAC National Accelerator Laboratory, shown at
+              990&times; magnification.
             </figcaption>
             <div className="sem-meta">
               {/* split so a narrow panel breaks between name and institution

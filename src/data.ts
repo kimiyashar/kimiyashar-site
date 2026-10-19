@@ -152,9 +152,8 @@ export const COMMUNITY: CommunityItem[] = [
 
 export const NOW = [
   { label: 'TartanAUV video compression', detail: 'RGB and depth compression for underwater robotics' },
-  { label: 'Raspberry Pi control build', detail: 'new hardware project around control theory' },
+  { label: 'Plant-watering rover', detail: 'AprilTag navigation and C++ control for my dorm garden' },
   { label: 'Read to Me', detail: 'Safari extension that reads articles aloud' },
-  { label: 'DormView', detail: '3D room planner for CMU dorms' },
 ]
 
 export const CONTACT = {
